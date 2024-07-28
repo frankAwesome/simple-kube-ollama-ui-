@@ -8,11 +8,13 @@ function App() {
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/prompt_llm', { prompt });
+      const res = await axios.post(`${API_BASE_URL}/prompt_llm`, { prompt });
       setResponse(res.data.response);
     } catch (error) {
       console.error('Error fetching the response:', error);
